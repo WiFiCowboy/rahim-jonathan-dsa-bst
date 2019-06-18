@@ -121,4 +121,59 @@ function balanced(t, count = 0) {
 }
 
 // console.log(returnthird(BST));
-console.log(balanced(BST));
+//console.log(balanced(BST));
+
+let arr1 =[3, 5, 4, 6, 1, 0, 2];
+let arr2 = [3, 1, 5, 2, 4, 6, 0];
+
+
+
+function findhighest(arr1, value)
+{
+    if (!arr1)
+      return;
+    if (arr1[0]>value)
+      return arr1[0];
+  
+    if (arr1[1])
+      return findhighest(arr1.slice(1), value);
+    return;
+}
+
+
+function comparetwoBST(arr1, arr2)
+{
+  // compare starting nodes
+  for (let i=0; i++; i<arr1.length)
+  {
+    let highest = findhighest(arr1, arr1[i]);
+    if ( highest !== findhighest(arr2.slice((arr2.indexOf(highest))), arr1[i]))
+    {
+      return false;
+    }
+  }
+  return true;
+}
+
+ console.log(comparetwoBST(arr1, arr2));
+
+
+
+function BSTIdentical(arr1, arr2) {
+
+
+  if (arr1[0]!==arr2[0])
+    return false;
+
+  arr1.sort();
+  arr2.sort();
+  if(arr1.length !== arr2.length)
+      return false;
+  for(var i = arr1.length; i--;) {
+      if(arr1[i] !== arr2[i])
+          return false;
+  }
+ 
+  
+
+}
