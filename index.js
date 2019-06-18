@@ -20,7 +20,6 @@ function tree(t) {
   return tree(t.left) + t.value + tree(t.right);
 }
 
-
 console.log(tree(BST));
 
 function height(t, counter = 0) {
@@ -79,25 +78,47 @@ function isValidBST(node, min = null, max = null) {
   return leftSide && rightSide;
 }
 
-function largestA(t, largest=[]) {
-    if (!t) {
-      return false;
-    }
-    largest.push(t.key)
-    if (t.left) largest = largestA(t.left, largest);
-    if (t.right) largest = largestA(t.right, largest);
-    return largest;
+function largestA(t, largest = []) {
+  if (!t) {
+    return false;
   }
-
-function returnthird(t)
-{
-    let unsorted = largestA(t);
-    unsorted.sort((a, b) => a < b);
-    return unsorted[2];
+  largest.push(t.key);
+  if (t.left) largest = largestA(t.left, largest);
+  if (t.right) largest = largestA(t.right, largest);
+  return largest;
 }
 
+function returnthird(t) {
+  let unsorted = largestA(t);
+  unsorted.sort((a, b) => a < b);
+  return unsorted[2];
+}
 
-console.log(returnthird(BST));
+function balanced(t, count = 0) {
+  if (!t) {
+    return count;
+  }
 
+  if (t !== null) {
+    count++;
+    let left = 0;
+    let right = 0;
+    //traverse right count nodes until null.  return bounce
+    right = balanced(t.right, count);
+    if (right === false) {
+      return false;
+    }
+    //traverse left counting nodes
+    left = balanced(t.left, count);
+    if (left === false) {
+      return false;
+    }
+    //if left or right is greater by more than 1, true, else false
+    return Math.abs(left - right) > 1 ? false : right + left;
+  }
 
+  //if the differnce between right and left is not greater than 1, return count.
+}
 
+// console.log(returnthird(BST));
+console.log(balanced(BST));
