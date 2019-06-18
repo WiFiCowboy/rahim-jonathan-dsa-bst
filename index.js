@@ -31,7 +31,6 @@ function height(t, counter = 0) {
   let left = counter;
   let right = counter;
   if (t.left) left = height(t.left, counter);
-
   if (t.right) right = height(t.right, counter);
 
   return left > right ? left : right;
@@ -80,20 +79,25 @@ function isValidBST(node, min = null, max = null) {
   return leftSide && rightSide;
 }
 
-function thirdlargest(t, largest=[]) {
+function largestA(t, largest=[]) {
     if (!t) {
       return false;
     }
-
     largest.push(t.key)
-
-    if (t.left) largest = thirdlargest(t.left, largest);
-    if (t.right) largest = thirdlargest(t.right, largest);
+    if (t.left) largest = largestA(t.left, largest);
+    if (t.right) largest = largestA(t.right, largest);
     return largest;
   }
 
-  let unsorted = thirdlargest(BST);
-  unsorted.sort((a, b) => a < b);
+function returnthird(t)
+{
+    let unsorted = largestA(t);
+    unsorted.sort((a, b) => a < b);
+    return unsorted[2];
+}
+
+
+console.log(returnthird(BST));
 
 
 
