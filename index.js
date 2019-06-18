@@ -20,6 +20,7 @@ function tree(t) {
   return tree(t.left) + t.value + tree(t.right);
 }
 
+
 console.log(tree(BST));
 
 function height(t, counter = 0) {
@@ -79,4 +80,20 @@ function isValidBST(node, min = null, max = null) {
   return leftSide && rightSide;
 }
 
-console.log(trubst(BST));
+function thirdlargest(t, largest=[]) {
+    if (!t) {
+      return false;
+    }
+
+    largest.push(t.key)
+
+    if (t.left) largest = thirdlargest(t.left, largest);
+    if (t.right) largest = thirdlargest(t.right, largest);
+    return largest;
+  }
+
+  let unsorted = thirdlargest(BST);
+  unsorted.sort((a, b) => a < b);
+
+
+
